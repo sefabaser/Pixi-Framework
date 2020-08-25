@@ -1,0 +1,44 @@
+{
+  "name": "pixi-framework",
+  "version": "0.0.0",
+  "description": "Pixi Framework",
+  "main": "dist/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sefabaser/Pixi-Framework.git"
+  },
+  "author": "sefabaser",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sefabaser/Pixi-Framework/issues"
+  },
+  "prettier": {
+    "trailingComma": "none",
+    "tabWidth": 2,
+    "printWidth": 150,
+    "singleQuote": true,
+    "arrowParens": "avoid"
+  },
+  "homepage": "https://github.com/sefabaser/Pixi-Framework#readme",
+  "scripts": {
+    "build": "tsc",
+    "pretest": "clear",
+    "lint": "eslint \"src/**/*.ts\" --fix",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:cov": "jest --coverage",
+    "deploy": "npm test && npm run build && npm publish"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@types/jest": "^26.0.10",
+    "@typescript-eslint/eslint-plugin": "^3.10.1",
+    "@typescript-eslint/parser": "^3.10.1",
+    "eslint": "^7.7.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-import": "^2.22.0",
+    "jest": "^26.4.2",
+    "ts-jest": "^26.2.0",
+    "typescript": "^4.0.2"
+  }
+}
