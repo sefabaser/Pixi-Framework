@@ -1,1 +1,1 @@
-console.log('hello world');
+export { Animator, AnimationType } from './animator/animator';
