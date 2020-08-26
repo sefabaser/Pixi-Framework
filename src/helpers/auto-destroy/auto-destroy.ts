@@ -6,7 +6,7 @@ import { Destroyable, Unsubscribable } from '../../../pixi-js/object-creation/de
 export type AutoDestroyable = Destroyable | Unsubscribable | AutoDestroyable[] | Variable<AutoDestroyable>;
 
 export function AutoDestroy(): PropertyDecorator {
-  return (target: Destroyable, key: string) => {
+  return (target: Destroyable, key: string | symbol) => {
     let originalDestroy = target.destroy;
     target.destroy = function () {
       DestroyAutoDestroyable((<any>this)[key]);
@@ -15,7 +15,7 @@ export function AutoDestroy(): PropertyDecorator {
   };
 }
 
-export function DestroyAutoDestroyable(object: AutoDestroyable) {
+export function DestroyAutoDestroyable(object: AutoDestroyable): void {
   if (object instanceof Variable) {
     DestroyAutoDestroyable(object.value);
   } else if (object instanceof Array) {
