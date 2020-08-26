@@ -1,8 +1,8 @@
 import { ViewClassType, View } from './view';
-import { UpdateAction, HardReset } from './helpers/update-loop';
 import { Store } from './store';
 import { EntityBase } from './entity-base';
 import { Service } from './service';
+import { UpdateAction, HardReset } from '../helpers/update-loop';
 
 export type EntityClassType = new (...args: any[]) => Entity;
 
@@ -36,7 +36,7 @@ export abstract class Entity extends EntityBase {
   private static baseEntity: EntityClassType | undefined;
   private static baseEntityInstanceIsCreated = false;
 
-  private static registerView<T extends Object>(ViewClass: ViewClassType<T>, EntityClass: EntityClassType) {
+  private static registerView<T>(ViewClass: ViewClassType<T>, EntityClass: EntityClassType) {
     if (!Entity.viewRegistries.has(EntityClass)) {
       Entity.viewRegistries.set(EntityClass, []);
     }

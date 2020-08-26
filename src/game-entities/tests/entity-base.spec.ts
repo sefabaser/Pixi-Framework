@@ -1,10 +1,10 @@
 import { Variable } from 'actions-lib';
 import { Wait } from 'helpers-lib';
 
-import { DecorateActionLib } from '../../../polyfills';
 import { EntityDecorator, Entity } from '../entity';
-import { Destroyable } from '../../pixi-js/object-creation/destroyable-interface';
-import { HardReset } from '../helpers/update-loop';
+import { HardReset } from '../../helpers/update-loop';
+import { DecorateActionLib } from '../../helpers/action-lib.polyfill';
+import { Destroyable } from '../../_interfaces';
 
 DecorateActionLib();
 

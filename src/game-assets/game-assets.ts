@@ -1,13 +1,14 @@
 import { Comparator } from 'helpers-lib';
 
 import { SetPixelPerfectIteraction } from './pixel-perfect-interaction';
-import { GroundMap } from './map-ground-image';
+import { Game } from '../app';
+import { ImageDataHelper } from './image-data.helper';
 
 export interface AssetDefinition<T extends string = string> {
   name: string;
   source: T | Record<T, string>;
   pixelPerfectInteraction?: boolean;
-  floorMap?: boolean;
+  pixelAccess?: boolean;
 }
 
 class GameAssetsClass {
@@ -52,7 +53,7 @@ class GameAssetsClass {
           keyToGroup.set(key, previouslyDefinedSourceKey);
         } else {
           sourceToKey.set(source, key);
-          App.loader.add(key, source);
+          Game.instance.app.loader.add(key, source);
         }
       };
 
@@ -72,15 +73,7 @@ class GameAssetsClass {
         }
       });
 
-      let handleTextureType = (baseTexture: PIXI.BaseTexture, definition: AssetDefinition) => {
-        if (definition.pixelPerfectInteraction) {
-          SetPixelPerfectIteraction(baseTexture);
-        } else if (definition.floorMap) {
-          GroundMap.processMapGroundImage(definition.name, baseTexture);
-        }
-      };
-
-      App.loader.load((loader, resources) => {
+      Game.instance.app.loader.load((loader, resources) => {
         assetDefinitions.forEach(definition => {
           if (Comparator.isString(definition.source)) {
             let resource = get(resources, definition.name);
@@ -88,12 +81,11 @@ class GameAssetsClass {
               if (resource.texture) {
                 if (definition.pixelPerfectInteraction) {
                   SetPixelPerfectIteraction(resource.texture.baseTexture);
-                } else if (definition.floorMap) {
-                  GroundMap.processMapGroundImage(definition.name, resource.texture.baseTexture);
+                } else if (definition.pixelAccess) {
+                  (<any>ImageDataHelper).registerImage(definition.name, resource.texture.baseTexture);
                 }
               }
 
-              resource.texture && handleTextureType(resource.texture.baseTexture, definition);
               this.recources.set(definition.name, resource);
             }
           } else if (Comparator.isObject(definition.source)) {
@@ -106,8 +98,8 @@ class GameAssetsClass {
                 if (resource.texture) {
                   if (definition.pixelPerfectInteraction) {
                     SetPixelPerfectIteraction(resource.texture.baseTexture);
-                  } else if (definition.floorMap && key === MapAssetMode.ground) {
-                    GroundMap.processMapGroundImage(definition.name, resource.texture.baseTexture);
+                  } else if (definition.pixelAccess) {
+                    (<any>ImageDataHelper).registerImage(definition.name, resource.texture.baseTexture);
                   }
                 }
 

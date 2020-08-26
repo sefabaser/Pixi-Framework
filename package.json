@@ -53,7 +53,8 @@
     "helpers-lib": "1.4.1",
     "pixi-sound": "^3.0.5",
     "pixi-viewport": "^4.13.2",
-    "pixi.js": "^5.3.3"
+    "pixi.js": "^5.3.3",
+    "reflect-metadata": "^0.1.13"
   },
   "devDependencies": {
     "@types/jest": "^26.0.10",

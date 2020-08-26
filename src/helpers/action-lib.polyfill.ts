@@ -1,5 +1,7 @@
+/* eslint-disable no-shadow */
 import { ActionSubscription, ReducerEffectChannel } from 'actions-lib';
-import { EntityBase } from '../framework/game-entities/entity-base';
+
+import { EntityBase } from '../game-entities/entity-base';
 
 declare module 'actions-lib' {
   class ActionSubscription {
@@ -11,7 +13,7 @@ declare module 'actions-lib' {
   }
 }
 
-export const DecorateActionLib = () => {
+export const DecorateActionLib = (): void => {
   ActionSubscription.prototype.attach = function (parent: EntityBase) {
     // @ts-ignore
     parent.setAttachment(this);

@@ -3,7 +3,7 @@ import { Wait } from 'helpers-lib';
 import { EntityDecorator, Entity } from '../entity';
 import { ServiceDecorator, Service, Inject } from '../service';
 import { ViewDecorator, View } from '../view';
-import { HardReset } from '../helpers/update-loop';
+import { HardReset } from '../../helpers/update-loop';
 
 describe('SERVICE', () => {
   afterEach(async () => {
@@ -118,23 +118,6 @@ describe('SERVICE', () => {
     expect(viewInstance?.service).toEqual(serviceInstance);
   });
 
-  it.only('inject decorator should throw error on views', async () => {
-    @ServiceDecorator()
-    class SampleService extends Service {}
-
-    @EntityDecorator({
-      baseEntity: true
-    })
-    class Parent extends Entity {}
-
-    expect(() => {
-      @ViewDecorator({ entity: Parent })
-      class SampleView extends View {
-        @Inject() service!: SampleService;
-      }
-    }).toThrow('something');
-  });
-
   it('inject other services to services', () => {
     let service1Instance: SampleService1 | undefined;
     let service2Instance: SampleService2 | undefined;
@@ -167,18 +150,6 @@ describe('SERVICE', () => {
     expect(service2Instance).toBeDefined();
     expect(parent.service2).toEqual(service2Instance);
     expect(service2Instance?.service1).toEqual(service1Instance);
-  });
-
-  it.only('inject decorator should throw error on services', () => {
-    @ServiceDecorator()
-    class SampleService1 extends Service {}
-
-    expect(() => {
-      @ServiceDecorator()
-      class SampleService2 extends Service {
-        @Inject() service!: SampleService1;
-      }
-    }).toThrow('something');
   });
 
   it('services should be singleton', () => {

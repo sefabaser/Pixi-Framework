@@ -2,8 +2,8 @@ import { Wait } from 'helpers-lib';
 
 import { EntityDecorator, Entity } from '../entity';
 import { Store } from '../store';
-import { HardReset } from '../helpers/update-loop';
 import { Service } from '../service';
+import { HardReset } from '../../helpers/update-loop';
 
 describe('STORE', () => {
   afterEach(async () => {

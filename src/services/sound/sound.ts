@@ -4,7 +4,7 @@ PixiSound.volumeAll = 0.1;
 
 @ServiceDecorator()
 export class SoundService extends Service {
-  play(sound: string) {
+  play(sound: string): void {
     PixiSound.play(sound);
   }
 }

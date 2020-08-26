@@ -20,7 +20,7 @@ export const ScreenResolution = {
 
 export class Game {
   private static inst: Game;
-  static instance(): Game {
+  static get instance(): Game {
     return this.inst;
   }
 

@@ -1,13 +1,17 @@
 import 'reflect-metadata';
-
-import { HardReset } from './helpers/update-loop';
+import { HardReset } from '../helpers/update-loop';
 
 export type ServiceClassType = new (...args: any[]) => Service;
 
 export function Inject(): PropertyDecorator {
   return (target: any, propertyKey: string | symbol) => {
     setTimeout(() => {
-      console.log(target.constructor.$meta);
+      let targetType = target?.constructor?.$meta?.type;
+      if (targetType === 'view') {
+        throw new Error(`Do not use 'Inject()' in views, use injection at constructor instead. Class: ${target?.constructor?.name}`);
+      } else if (targetType === 'service') {
+        throw new Error(`Do not use 'Inject()' in services, use injection at constructor instead. Class: ${target?.constructor?.name}`);
+      }
     });
 
     let propertyType: any = Reflect.getMetadata('design:type', target, propertyKey) || [];
@@ -50,7 +54,7 @@ export class Service {
     return <T>service;
   }
 
-  static getParametersMeta(target: any): any[] {
+  static getParametersMeta(target: new (...args: any[]) => any): any[] {
     let paramtypes: any[] = Reflect.getMetadata('design:paramtypes', target) || [];
     if (paramtypes.some(type => !type)) {
       console.error(`Circular dependency: ${target.name}`);

@@ -1,7 +1,7 @@
 import { Variable } from 'actions-lib';
 import { Comparator } from 'helpers-lib';
 
-import { Destroyable, Unsubscribable } from '../../../pixi-js/object-creation/destroyable-interface';
+import { Destroyable, Unsubscribable } from '../../_interfaces';
 
 export type AutoDestroyable = Destroyable | Unsubscribable | AutoDestroyable[] | Variable<AutoDestroyable>;
 

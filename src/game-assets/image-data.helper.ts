@@ -9,12 +9,21 @@ export interface Pixel {
 }
 
 export class ImageDataHelper {
-  size: Vec2;
+  private static helperMap = new Map<string, ImageDataHelper>();
+  static getInstance(name: string): ImageDataHelper | undefined {
+    return this.helperMap.get(name);
+  }
+  private static registerImage(name: string, baseTexture: PIXI.BaseTexture): void {
+    let helper = new ImageDataHelper(baseTexture);
+    this.helperMap.set(name, helper);
+  }
+
+  readonly size: Vec2;
 
   private imageData: Uint8ClampedArray;
 
-  constructor(baseTex: PIXI.BaseTexture) {
-    let imgSource: any = (<any>baseTex.resource)?.source;
+  private constructor(baseTexture: PIXI.BaseTexture) {
+    let imgSource: any = (<any>baseTexture.resource)?.source;
     if (!imgSource) {
       throw new Error(`ImageDataHelper: No 'resource.source' in BaseTexture!`);
     }

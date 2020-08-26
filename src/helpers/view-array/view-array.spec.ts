@@ -1,5 +1,5 @@
 import { ViewArrayController, ViewArray } from './view-array';
-import { Vec2 } from '../../../../common/vector/vector';
+import { Vec2 } from '../../lib/vector/vector';
 
 class TestController extends ViewArrayController<Vec2> {
   static createCalls: { pos: Vec2; index: number }[];
@@ -20,7 +20,7 @@ class TestController extends ViewArrayController<Vec2> {
   }
 }
 
-const attachTarget = <any>{
+let attachTargetMock = <any>{
   setAttachment: () => {}
 };
 
@@ -32,7 +32,7 @@ describe('View Array', () => {
   });
 
   it('should call create functions on new definitions', () => {
-    let test = new ViewArray<Vec2>(TestController).attach(attachTarget);
+    let test = new ViewArray<Vec2>(TestController).attach(attachTargetMock);
     test.set([
       { x: 1, y: 1 },
       { x: 2, y: 2 }
@@ -45,7 +45,7 @@ describe('View Array', () => {
   });
 
   it('should call delete functions on setting empty array', () => {
-    let test = new ViewArray<Vec2>(TestController).attach(attachTarget);
+    let test = new ViewArray<Vec2>(TestController).attach(attachTargetMock);
     test.set([
       { x: 1, y: 1 },
       { x: 2, y: 2 }
@@ -59,7 +59,7 @@ describe('View Array', () => {
   });
 
   it('sould call update function when receiving same definition', () => {
-    let test = new ViewArray<Vec2>(TestController).attach(attachTarget);
+    let test = new ViewArray<Vec2>(TestController).attach(attachTargetMock);
     let arr = [
       { x: 1, y: 1 },
       { x: 2, y: 2 }
@@ -74,7 +74,7 @@ describe('View Array', () => {
   });
 
   it('trackBy', () => {
-    let test = new ViewArray<Vec2>(TestController).attach(attachTarget);
+    let test = new ViewArray<Vec2>(TestController).attach(attachTargetMock);
     test.trackBy('x');
     test.set([
       { x: 1, y: 1 },
@@ -92,7 +92,7 @@ describe('View Array', () => {
   });
 
   it('integration', () => {
-    let test = new ViewArray<Vec2>(TestController).attach(attachTarget);
+    let test = new ViewArray<Vec2>(TestController).attach(attachTargetMock);
     test.trackBy('x');
     test.set([
       { x: 1, y: 1 },
@@ -114,7 +114,7 @@ describe('View Array', () => {
   });
 
   it('sould throw error if set is called after array is destroyed', () => {
-    let test = new ViewArray<Vec2>(TestController).attach(attachTarget);
+    let test = new ViewArray<Vec2>(TestController).attach(attachTargetMock);
     test.set([
       { x: 1, y: 1 },
       { x: 2, y: 2 }

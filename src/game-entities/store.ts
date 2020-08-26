@@ -1,6 +1,6 @@
 import { Entity, EntityClassType } from './entity';
 import { Service, ServiceDecorator } from './service';
-import { HardReset } from './helpers/update-loop';
+import { HardReset } from '../helpers/update-loop';
 
 @ServiceDecorator()
 export class Store extends Service {

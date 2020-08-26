@@ -3,7 +3,7 @@ import { Variable } from 'actions-lib';
 
 import { AutoDestroy } from './auto-destroy';
 import { Entity, EntityDecorator } from '../../game-entities/entity';
-import { HardReset } from '../../game-entities/helpers/update-loop';
+import { HardReset } from '../update-loop';
 
 describe('AUTO DESTROY', () => {
   it('destroy function for the variable should be called on destroy', () => {

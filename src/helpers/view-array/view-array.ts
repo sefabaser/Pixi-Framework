@@ -1,7 +1,7 @@
 import { JsonHelper } from 'helpers-lib';
 
-import { Destroyable } from '../destroyable-interface';
 import { EntityBase } from '../../game-entities/entity-base';
+import { Destroyable } from '../../_interfaces';
 
 export class ViewArrayBase<ItemType, DefinitionType> {
   items: { item: ItemType; definition: DefinitionType }[] = [];
@@ -23,7 +23,7 @@ export class ViewArrayBase<ItemType, DefinitionType> {
     });
   }
 
-  set(definitions: DefinitionType[]) {
+  set(definitions: DefinitionType[]): void {
     if (this.destroyed) {
       throw new Error(`ViewArrayBase: set operation attempt after destruction!`);
     }
@@ -48,21 +48,21 @@ export class ViewArrayBase<ItemType, DefinitionType> {
     }
   }
 
-  trackBy(path: string) {
+  trackBy(path: string): ViewArrayBase<ItemType, DefinitionType> {
     this.trackByPath = path;
     return this;
   }
 
-  destroy() {
-    this.set([]);
-    this.destroyed = true;
-  }
-
-  attach(parent: EntityBase) {
+  attach(parent: EntityBase): ViewArrayBase<ItemType, DefinitionType> {
     // @ts-ignore
     parent.setAttachment(this);
     this.attachIsCalled = true;
     return this;
+  }
+
+  destroy(): void {
+    this.set([]);
+    this.destroyed = true;
   }
 }
 
@@ -73,9 +73,7 @@ export class ViewArray<DefinitionType> extends ViewArrayBase<Destroyable, Defini
     ControllerClass: new (definition: DefinitionType, index: number, ...args: any[]) => ViewArrayController<DefinitionType>,
     ...args: any[]
   ) {
-    let createF = (definition: DefinitionType, index: number) => {
-      return new ControllerClass(definition, index, ...args);
-    };
+    let createF = (definition: DefinitionType, index: number) => new ControllerClass(definition, index, ...args);
     let updateF = (item: ViewArrayController<DefinitionType>, definition: DefinitionType, index: number) => {
       item.update(definition, index);
     };
@@ -88,7 +86,7 @@ export class ViewArray<DefinitionType> extends ViewArrayBase<Destroyable, Defini
     this.controllerClassName = ControllerClass.name;
   }
 
-  set(definitions: DefinitionType[]) {
+  set(definitions: DefinitionType[]): void {
     if (this.destroyed) {
       throw new Error(`ViewArray: set operation attempt after destruction! controller: '${this.controllerClassName}'`);
     }

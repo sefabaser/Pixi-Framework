@@ -1,9 +1,9 @@
 import { ActionSubscription, ReducerEffectChannel } from 'actions-lib';
 
 import { AutoDestroyable, DestroyAutoDestroyable } from '../helpers/auto-destroy/auto-destroy';
-import { Destroyable, Unsubscribable } from '../pixi-js/object-creation/destroyable-interface';
 import { Entity } from './entity';
 import { Image } from '../helpers/image/image';
+import { Destroyable, Unsubscribable } from '../_interfaces';
 
 export type IAttachable = Entity | Image | ActionSubscription | ReducerEffectChannel<any, any>;
 

@@ -3,7 +3,7 @@ import { Wait } from 'helpers-lib';
 
 import { EntityDecorator, Entity } from '../entity';
 import { ViewDecorator, View } from '../view';
-import { UpdateAction, HardReset } from '../helpers/update-loop';
+import { UpdateAction, HardReset } from '../../helpers/update-loop';
 
 describe('ENTITY', () => {
   afterEach(async () => {
