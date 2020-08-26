@@ -9,3 +9,8 @@ export interface Unsubscribable {
 export interface CanBeParent {
   addChild(...args: any[]): void;
 }
+
+export interface FilterDefinition {
+  filter: PIXI.Filter;
+  order: number;
+}

@@ -1,8 +1,7 @@
 import { GameAssets } from '../../game-assets/game-assets';
-import { FilterDefinition } from '../../../../filters/filters';
 import { Image } from './image';
-import { CanBeParent } from '../destroyable-interface';
-import { Vec2 } from '../../../../common/vector/vector';
+import { CanBeParent, FilterDefinition } from '../../_interfaces';
+import { Vec2 } from '../../lib/vector/vector';
 
 export class ImageCreator {
   private sprite: PIXI.Sprite;

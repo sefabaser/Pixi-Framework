@@ -14,9 +14,10 @@ module.exports = {
     node: true,
     jest: true
   },
-  plugins: ['@typescript-eslint', '@typescript-eslint/eslint-plugin'],
+  plugins: ['@typescript-eslint', '@typescript-eslint/eslint-plugin', 'no-null'],
   ignorePatterns: ['**/*.js'],
   rules: {
+    'no-null/no-null': 2,
     '@typescript-eslint/adjacent-overload-signatures': 'error',
     '@typescript-eslint/ban-ts-comment': 'off',
     '@typescript-eslint/ban-types': 'error',

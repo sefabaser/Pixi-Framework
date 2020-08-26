@@ -1,13 +1,13 @@
 // TODO: use ImageDataHelper
 PIXI.Sprite.prototype.containsPoint = function (point) {
-  const tempPoint = new PIXI.Point();
+  let tempPoint = new PIXI.Point();
   this.worldTransform.applyInverse(point, tempPoint);
 
   // @ts-ignore
-  const width = this._texture.orig.width;
+  let width = this._texture.orig.width;
   // @ts-ignore
-  const height = this._texture.orig.height;
-  const x1 = -width * this.anchor.x;
+  let height = this._texture.orig.height;
+  let x1 = -width * this.anchor.x;
   let y1 = 0;
 
   let flag = false;
@@ -24,9 +24,9 @@ PIXI.Sprite.prototype.containsPoint = function (point) {
   }
 
   // bitmap check
-  const tex = this.texture;
-  const baseTex = this.texture.baseTexture;
-  const res = baseTex.resolution;
+  let tex = this.texture;
+  let baseTex = this.texture.baseTexture;
+  let res = baseTex.resolution;
 
   // @ts-ignore
   if (!baseTex.hitmap) {
@@ -34,31 +34,31 @@ PIXI.Sprite.prototype.containsPoint = function (point) {
   }
 
   // @ts-ignore
-  const hitmap = baseTex.hitmap;
+  let hitmap = baseTex.hitmap;
   // this does not account for rotation yet!!!
   let dx = Math.round((tempPoint.x - x1 + tex.frame.x) * res);
   let dy = Math.round((tempPoint.y - y1 + tex.frame.y) * res);
   let ind = dx + dy * baseTex.realWidth;
   let ind1 = ind % 32;
-  // tslint:disable-next-line: no-bitwise
+  // eslint-disable-next-line no-bitwise
   let ind2 = (ind / 32) | 0;
-  // tslint:disable-next-line: no-bitwise
+  // eslint-disable-next-line no-bitwise
   return (hitmap[ind2] & (1 << ind1)) !== 0;
 };
 
 // TODO: use ImageDataHelper
-export function SetPixelPerfectIteraction(baseTex: PIXI.BaseTexture) {
+export function SetPixelPerfectIteraction(baseTex: PIXI.BaseTexture): boolean {
   if (!baseTex.resource) {
     return false;
   }
   // @ts-ignore
-  const imgSource = baseTex.resource.source;
-  // tslint:disable-next-line: no-null-keyword
+  let imgSource = baseTex.resource.source;
+  // eslint-disable-next-line no-null/no-null
   let canvas = null;
   if (!imgSource) {
     return false;
   }
-  // tslint:disable-next-line: no-null-keyword
+  // eslint-disable-next-line no-null/no-null
   let context = null;
   if (imgSource.getContext) {
     canvas = imgSource;
@@ -73,17 +73,17 @@ export function SetPixelPerfectIteraction(baseTex: PIXI.BaseTexture) {
     return false;
   }
 
-  const w = canvas.width;
-  const h = canvas.height;
+  let w = canvas.width;
+  let h = canvas.height;
   let imageData = context.getImageData(0, 0, w, h);
   // @ts-ignore
   let hitmap = (baseTex.hitmap = new Uint32Array(Math.ceil((w * h) / 32)));
   for (let i = 0; i < w * h; i++) {
     let ind1 = i % 32;
-    // tslint:disable-next-line: no-bitwise
+    // eslint-disable-next-line no-bitwise
     let ind2 = (i / 32) | 0;
     if (imageData.data[i * 4 + 3] >= 1) {
-      // tslint:disable-next-line: no-bitwise
+      // eslint-disable-next-line no-bitwise
       hitmap[ind2] = hitmap[ind2] | (1 << ind1);
     }
   }

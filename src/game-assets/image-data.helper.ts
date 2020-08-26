@@ -1,4 +1,5 @@
-import { Vec2 } from '../../../common';
+import { Image } from '../helpers/image/image';
+import { Vec2 } from '../lib/vector/vector';
 
 export interface Pixel {
   r: number;
@@ -13,7 +14,7 @@ export class ImageDataHelper {
   private imageData: Uint8ClampedArray;
 
   constructor(baseTex: PIXI.BaseTexture) {
-    const imgSource: any = (<any>baseTex.resource)?.source;
+    let imgSource: any = (<any>baseTex.resource)?.source;
     if (!imgSource) {
       throw new Error(`ImageDataHelper: No 'resource.source' in BaseTexture!`);
     }
@@ -28,7 +29,7 @@ export class ImageDataHelper {
       canvas.width = this.size.x;
       canvas.height = this.size.y;
       context = canvas.getContext('2d') || undefined;
-      context && context.drawImage(imgSource, 0, 0);
+      context && context.drawImage(<any>imgSource, 0, 0);
     } else {
       throw new Error(`ImageDataHelper: No 'context' extracted from BaseTexture!`);
     }

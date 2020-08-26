@@ -1,6 +1,6 @@
-import { FilterDefinition } from '../../../../filters/filters';
 import { EntityBase } from '../../game-entities/entity-base';
-import { Vec2 } from '../../../../common';
+import { Vec2 } from '../../lib/vector/vector';
+import { FilterDefinition } from '../../_interfaces';
 
 export class Image {
   readonly sprite: PIXI.Sprite;
@@ -19,7 +19,7 @@ export class Image {
     sprite.filters = [];
   }
 
-  get position() {
+  get position(): Vec2 {
     return { x: this.sprite.x, y: this.sprite.y };
   }
   set position(value: Vec2) {
@@ -27,7 +27,7 @@ export class Image {
     this.sprite.y = value.y;
   }
 
-  get brightness() {
+  get brightness(): number {
     return this._brightness;
   }
   set brightness(value: number) {
@@ -35,7 +35,7 @@ export class Image {
     this.refreshColorMatrix();
   }
 
-  get red() {
+  get red(): number {
     return this._red;
   }
   set red(value: number) {
@@ -43,7 +43,7 @@ export class Image {
     this.refreshColorMatrix();
   }
 
-  get green() {
+  get green(): number {
     return this._green;
   }
   set green(value: number) {
@@ -51,7 +51,7 @@ export class Image {
     this.refreshColorMatrix();
   }
 
-  get blue() {
+  get blue(): number {
     return this._blue;
   }
   set blue(value: number) {
@@ -59,7 +59,7 @@ export class Image {
     this.refreshColorMatrix();
   }
 
-  activateColorFilter() {
+  activateColorFilter(): void {
     this.colorMatrix = new PIXI.filters.ColorMatrixFilter();
     this.addFilter({
       filter: this.colorMatrix,
@@ -67,7 +67,7 @@ export class Image {
     });
   }
 
-  addFilter(filterDefinition: FilterDefinition) {
+  addFilter(filterDefinition: FilterDefinition): void {
     if (!this.sprite.filters.includes(filterDefinition.filter)) {
       let index = this.filterDefinitions.findIndex(definition => definition.order >= filterDefinition.order);
       if (index >= 0) {
@@ -80,24 +80,24 @@ export class Image {
     }
   }
 
-  removeFilter(filterDefinition: FilterDefinition) {
+  removeFilter(filterDefinition: FilterDefinition): void {
     if (this.sprite.filters) {
       this.filterDefinitions = this.filterDefinitions.filter(definition => definition !== filterDefinition);
       this.sprite.filters = this.sprite.filters.filter(currentFilter => currentFilter !== filterDefinition.filter);
     }
   }
 
-  tint(tint: number) {
+  tint(tint: number): void {
     this.sprite.tint = tint;
   }
 
-  attach(parent: EntityBase) {
+  attach(parent: EntityBase): Image {
     // @ts-ignore
     parent.setAttachment(this);
     return this;
   }
 
-  destroy() {
+  destroy(): void {
     this.filterDefinitions = [];
     this.sprite.destroy();
   }
