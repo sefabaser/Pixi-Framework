@@ -6,10 +6,8 @@ window.PIXI = PIXI;
 import { Application } from 'pixi.js';
 import { Viewport } from 'pixi-viewport';
 
-import { DecorateActionLib } from './helpers/action-lib.polyfill';
 import { GameAssets, AssetDefinition } from './game-assets/game-assets';
 import { UpdateTick } from './helpers/update-loop';
-DecorateActionLib();
 
 // PIXI.settings.ROUND_PIXELS = true;
 

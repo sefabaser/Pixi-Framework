@@ -10,9 +10,9 @@
     "strictFunctionTypes": false,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
+    "declaration": true,
     "outDir": "./dist/",
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true
-  },
-  "include": ["src/**/*.ts"]
+  }
 }

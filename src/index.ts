@@ -1,2 +1,13 @@
 export { Animator, AnimationType } from './helpers/animator/animator';
-export { AutoDestroy } from './helpers/auto-destroy/auto-destroy';
+export { Store } from './game-entities/store';
+export { AutoDestroy, AutoDestroyable } from './helpers/auto-destroy/auto-destroy';
+export { Destroyable, Unsubscribable, CanBeParent } from './_interfaces';
+export { UpdateTick } from './helpers/update-loop';
+export { Entity, EntityDecorator } from './game-entities/entity';
+export { View, ViewDecorator, ViewDecoratorMeta } from './game-entities/view';
+export { AssetDefinition, GameAssets } from './game-assets/game-assets';
+export { ImageCreator } from './helpers/image/image-creator';
+export { Image } from './helpers/image/image';
+export { ViewArrayBase, ViewArray, ViewArrayController } from './helpers/view-array/view-array';
+export { KeyboardService } from './services/keyboard/keyboard';
+export { SoundService } from './services/sound/sound';
