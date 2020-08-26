@@ -14,10 +14,26 @@ module.exports = {
     node: true,
     jest: true
   },
-  plugins: ['@typescript-eslint', '@typescript-eslint/eslint-plugin', 'no-null'],
+  plugins: ['@typescript-eslint', '@typescript-eslint/eslint-plugin', 'no-null', 'sort-class-members'],
   ignorePatterns: ['**/*.js'],
   rules: {
     'no-null/no-null': 2,
+    'sort-class-members/sort-class-members': [
+      2,
+      {
+        order: [
+          '[static-properties]',
+          '[static-private-properties]',
+          '[static-methods]',
+          '[properties]',
+          '[conventional-private-properties]',
+          'constructor',
+          '[methods]',
+          '[conventional-private-methods]'
+        ],
+        accessorPairPositioning: 'getThenSet'
+      }
+    ],
     '@typescript-eslint/adjacent-overload-signatures': 'error',
     '@typescript-eslint/ban-ts-comment': 'off',
     '@typescript-eslint/ban-types': 'error',
@@ -46,7 +62,6 @@ module.exports = {
         }
       }
     ],
-    '@typescript-eslint/member-ordering': 'error',
     '@typescript-eslint/naming-convention': [
       'error',
       {
