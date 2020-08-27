@@ -8,7 +8,7 @@ export interface AssetDefinition<T extends string = string> {
   name: string;
   source: T | Record<T, string>;
   pixelPerfectInteraction?: boolean;
-  pixelAccess?: boolean;
+  pixelAccess?: boolean | string[];
 }
 
 class GameAssetsClass {
@@ -53,7 +53,7 @@ class GameAssetsClass {
         }
       };
 
-      let get = (resources: Partial<Record<string, PIXI.LoaderResource>>, key: string) => {
+      let getResource = (resources: Partial<Record<string, PIXI.LoaderResource>>, key: string) => {
         let group = keyToGroup.get(key) || key;
         return resources[group];
       };
@@ -72,12 +72,13 @@ class GameAssetsClass {
       Game.instance.app.loader.load((loader, resources) => {
         assetDefinitions.forEach(definition => {
           if (Comparator.isString(definition.source)) {
-            let resource = get(resources, definition.name);
+            let resource = getResource(resources, definition.name);
             if (resource) {
               if (resource.texture) {
                 if (definition.pixelPerfectInteraction) {
                   SetPixelPerfectIteraction(resource.texture.baseTexture);
-                } else if (definition.pixelAccess) {
+                }
+                if (definition.pixelAccess) {
                   (<any>ImageDataHelper).registerImage(definition.name, resource.texture.baseTexture);
                 }
               }
@@ -89,12 +90,16 @@ class GameAssetsClass {
             let resourceObject: Record<string, PIXI.LoaderResource> = {};
 
             Object.keys(source).forEach(key => {
-              let resource = get(resources, `${definition.name}#${key}`);
+              let resource = getResource(resources, `${definition.name}#${key}`);
               if (resource) {
                 if (resource.texture) {
                   if (definition.pixelPerfectInteraction) {
                     SetPixelPerfectIteraction(resource.texture.baseTexture);
-                  } else if (definition.pixelAccess) {
+                  }
+                  if (
+                    (Comparator.isArray(definition.pixelAccess) && (<string[]>definition.pixelAccess).indexOf(key) !== -1) ||
+                    definition.pixelAccess === true
+                  ) {
                     (<any>ImageDataHelper).registerImage(definition.name, resource.texture.baseTexture);
                   }
                 }
