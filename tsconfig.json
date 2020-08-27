@@ -3,7 +3,6 @@
     "module": "CommonJS",
     "target": "es5",
     "lib": ["es5", "es6", "dom"],
-    "sourceMap": true,
     "noImplicitAny": true,
     "noImplicitThis": true,
     "strict": true,

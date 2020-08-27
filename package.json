@@ -1,6 +1,6 @@
 {
   "name": "pixi-framework",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "description": "Pixi Framework",
   "main": "dist/index.js",
   "repository": {
@@ -39,6 +39,7 @@
   },
   "homepage": "https://github.com/sefabaser/Pixi-Framework#readme",
   "scripts": {
+    "clean-install": "cls && del /F /Q node_modules && del /F /Q package-lock.json && npm install",
     "build": "tsc",
     "pretest": "cls",
     "lint": "eslint \"src/**/*.ts\" --fix",
