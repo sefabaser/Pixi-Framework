@@ -1,6 +1,6 @@
 import { AStarFinder } from 'astar-typescript';
 import { Comparator } from 'helpers-lib';
-import { Viewport as ViewportClass } from 'pixi-viewport';
+import { Viewport } from 'pixi-viewport';
 
 import { Vec2 } from '../vector/vector';
 
@@ -22,7 +22,7 @@ export class CommonLib {
     }
   }
 
-  static convertScreenPositionToWorldPosition(position: Vec2, viewport: ViewportClass): Vec2 {
+  static convertScreenPositionToWorldPosition(position: Vec2, viewport: Viewport): Vec2 {
     let imagePosition = {
       x: (position.x - viewport.position.x) / viewport.scale.x,
       y: (position.y - viewport.position.y) / viewport.scale.y
