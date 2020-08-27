@@ -16,7 +16,7 @@ class GameAssetsClass {
 
   getAsset(name: string, mode?: string): PIXI.LoaderResource {
     let resource = this.recources.get(name);
-    if (!mode) {
+    if (resource && !mode) {
       return <PIXI.LoaderResource>resource;
     } else if (Comparator.isObject(resource)) {
       if (mode && (<any>resource)[mode]) {
