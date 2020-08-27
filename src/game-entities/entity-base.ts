@@ -1,11 +1,5 @@
-import { ActionSubscription, ReducerEffectChannel } from 'actions-lib';
-
 import { AutoDestroyable, DestroyAutoDestroyable } from '../helpers/auto-destroy/auto-destroy';
-import { Entity } from './entity';
-import { Image } from '../helpers/image/image';
 import { Destroyable, Unsubscribable } from '../_interfaces';
-
-export type IAttachable = Entity | Image | ActionSubscription | ReducerEffectChannel<any, any>;
 
 export abstract class EntityBase {
   protected destroyed = false;
@@ -28,7 +22,7 @@ export abstract class EntityBase {
   update?(time: number, delta: number): void;
   destroy(): void {}
 
-  private setAttachment(child: Destroyable | Unsubscribable) {
+  setAttachment(child: Destroyable | Unsubscribable): void {
     if (this.destroyed) {
       DestroyAutoDestroyable(child);
     } else {

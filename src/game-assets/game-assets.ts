@@ -16,12 +16,8 @@ class GameAssetsClass {
 
   getAsset(name: string, mode?: string): PIXI.LoaderResource {
     let resource = this.recources.get(name);
-    if (resource instanceof PIXI.LoaderResource) {
-      if (!mode) {
-        return resource;
-      } else {
-        throw new Error(`Game Assets: Resource do not have mode! Key: '${name}'`);
-      }
+    if (!mode) {
+      return <PIXI.LoaderResource>resource;
     } else if (Comparator.isObject(resource)) {
       if (mode && (<any>resource)[mode]) {
         return (<any>resource)[mode];

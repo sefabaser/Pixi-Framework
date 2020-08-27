@@ -1,3 +1,5 @@
+import * as PIXI from 'pixi.js';
+
 // TODO: use ImageDataHelper
 PIXI.Sprite.prototype.containsPoint = function (point) {
   let tempPoint = new PIXI.Point();

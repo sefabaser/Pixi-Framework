@@ -1,4 +1,3 @@
-import { Variable } from 'actions-lib';
 import { Wait } from 'helpers-lib';
 
 import { EntityDecorator, Entity } from '../entity';
@@ -15,16 +14,12 @@ describe('ENTITY', () => {
     expect(() => {
       {
         @EntityDecorator()
-        class Sample extends Entity {
-          readonly str = new Variable<string>();
-        }
+        class Sample extends Entity {}
       }
 
       {
         @EntityDecorator()
-        class Sample extends Entity {
-          readonly str = new Variable<string>();
-        }
+        class Sample extends Entity {}
       }
     }).toThrow();
   });

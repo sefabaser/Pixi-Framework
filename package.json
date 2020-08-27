@@ -1,6 +1,6 @@
 {
   "name": "pixi-framework",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Pixi Framework",
   "main": "dist/index.js",
   "repository": {
@@ -49,7 +49,7 @@
   },
   "dependencies": {
     "@pixi/unsafe-eval": "^5.3.3",
-    "actions-lib": "1.3.0",
+    "actions-lib": "1.3.1",
     "helpers-lib": "1.4.1",
     "pixi-sound": "^3.0.5",
     "pixi-viewport": "^4.13.2",

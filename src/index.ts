@@ -11,3 +11,4 @@ export { Image } from './helpers/image/image';
 export { ViewArrayBase, ViewArray, ViewArrayController } from './helpers/view-array/view-array';
 export { KeyboardService } from './services/keyboard/keyboard';
 export { SoundService } from './services/sound/sound';
+export { Game } from './app';

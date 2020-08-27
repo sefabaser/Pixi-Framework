@@ -1,5 +1,5 @@
-import { Variable } from 'actions-lib';
 import { Wait } from 'helpers-lib';
+import { Variable } from 'actions-lib';
 
 import { EntityDecorator, Entity } from '../entity';
 import { HardReset } from '../../helpers/update-loop';
@@ -56,7 +56,6 @@ describe('ENTITY BASE', () => {
     expect(foo.destroyed).toBeTruthy();
   });
 
-  /*
   it('subscription', async () => {
     @EntityDecorator({
       baseEntity: true
@@ -73,7 +72,7 @@ describe('ENTITY BASE', () => {
 
     await Wait();
     expect(foo.listenerCount).toEqual(0);
-  }); */
+  });
 
   it('entity attachment in constructor', async () => {
     let childDestoyIsCalled = false;
