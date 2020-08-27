@@ -1,4 +1,4 @@
-import { Image } from '../helpers/image/image';
+import { Image } from './image/image';
 import { Vec2 } from '../lib/vector/vector';
 
 export interface Pixel {

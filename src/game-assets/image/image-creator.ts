@@ -1,4 +1,4 @@
-import { GameAssets } from '../../game-assets/game-assets';
+import { GameAssets } from '../game-assets';
 import { Image } from './image';
 import { CanBeParent, FilterDefinition } from '../../_interfaces';
 import { Vec2 } from '../../lib/vector/vector';
