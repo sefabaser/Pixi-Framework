@@ -39,7 +39,7 @@
   },
   "homepage": "https://github.com/sefabaser/Pixi-Framework#readme",
   "scripts": {
-    "clean-install": "cls && del /F /Q node_modules && del /F /Q package-lock.json && npm install",
+    "clean-install": "cls && rm -rf node_modules && rm -rf package-lock.json && npm install",
     "build": "tsc",
     "pretest": "cls",
     "lint": "eslint \"src/**/*.ts\" --fix",
