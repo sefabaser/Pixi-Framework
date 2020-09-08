@@ -1,6 +1,6 @@
 import { Comparator } from 'helpers-lib';
 import { ActionSubscription } from 'actions-lib';
-import { UpdateAction } from '../helpers/update-loop';
+import { UpdateAction } from '../update-loop';
 
 interface PropertyState {
   duration: number;
